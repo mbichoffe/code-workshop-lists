@@ -21,8 +21,12 @@ def add_to_list(my_list):
         print "\nYour first item, " + item + ", was added successfully"
     else:
         list_position = '\n \n And where in the list do you want this item to be added? (Type a number > 1)\n '''
-        position = raw_input(list_position)
-        my_list.insert((int(position)-1), item)
+        position = int(raw_input(list_position))
+        if type(position) == int and position > 1: 
+            my_list.insert((position-1), item)
+        else: 
+            print 'Invalid choice'
+            add_to_list(my_list)
         
 
         print item + " added successfully" 
@@ -33,10 +37,17 @@ def add_to_list(my_list):
 
 def view_list(my_list):
     """Print each item in the list."""
-    print 'To do List: \n'
-    for index, item in enumerate(my_list, 1):
-        print index, item
-
+    view_options = raw_input("\nView in alphabetical order? (Y/N)\n ")
+    if (view_options).upper() == 'Y':
+        my_list.sort()
+        for index, item in enumerate(my_list, 1):
+            print index, item 
+    if (view_options).upper() == 'N': 
+        print 'To do List: \n'
+        for index, item in enumerate(my_list, 1):
+            print index, item
+            
+    else: print 'Invalid option'
     display_main_menu(my_list)
  
 
