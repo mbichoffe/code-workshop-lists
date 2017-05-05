@@ -36,17 +36,33 @@ def add_to_list(my_list):
 
 
 def view_list(my_list):
-    """Print each item in the list."""
-    view_options = raw_input("\nView in alphabetical order? (Y/N)\n ")
-    if (view_options).upper() == 'Y':
+    """Takes input on how many items the user would like to see and returns partial list of items"""
+    view_options = "\nHow many items would you like to see? (Type ALL if all items)\n"
+    view_choice = raw_input(view_options)
+    if view_choice.upper() == 'ALL' :
+        return alpha_options(my_list)
+    elif int(view_choice) >= 0:
+        partial_list = my_list[0:int(view_choice)]
+        for item in partial_list:
+            print item
+    else: 
+        print 'Invalid option'
+    
+    display_main_menu(my_list)
+
+
+def alpha_options(my_list):
+    """Print each item in the list, in alphabetical order or by input order"""
+    alpha_options = raw_input("\nView in alphabetical order? (Y/N)\n ")
+    if (alpha_options).upper() == 'Y':
         my_list.sort()
         for index, item in enumerate(my_list, 1):
             print index, item 
-    if (view_options).upper() == 'N': 
+    if (alpha_options).upper() == 'N': 
         print 'To do List: \n'
         for index, item in enumerate(my_list, 1):
             print index, item
-            
+
     else: print 'Invalid option'
     display_main_menu(my_list)
  
